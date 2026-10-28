@@ -452,3 +452,27 @@ html.light .theme-surface .text-slate-400 { color: #5d6b83 !important; }
     transition: none !important;
   }
 }
+
+
+/* Action-label contrast fixes for utility classes used by the existing markup. */
+a.bg-white,
+button.bg-white,
+.bg-white.text-slate-950,
+.bg-white .text-slate-950 { color: #101629 !important; }
+
+[class~="bg-[#25D366]"],
+[class~="bg-[#25D366]"] .text-slate-950 {
+  background-color: #25d366 !important;
+  color: #052e16 !important;
+}
+
+html.light a.bg-white,
+html.light button.bg-white,
+html.light .bg-white.text-slate-950,
+html.light .bg-white .text-slate-950 { color: #101629 !important; }
+
+html.light [class~="bg-[#25D366]"],
+html.light [class~="bg-[#25D366]"] .text-slate-950 { color: #052e16 !important; }
+
+html.light [class~="bg-[#315efb]"] .text-white,
+html.light [class~="bg-[#315efb]"].text-white { color: #fff !important; }
