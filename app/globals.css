@@ -1,0 +1,140 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * .6);
+  --radius-md: calc(var(--radius) * .8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root { color-scheme: dark; --background: #050505; --foreground: #f5f5f5; --border: #262626; --ring: #ffffff; --radius: .625rem; --font-display: Georgia, 'Times New Roman', Times, serif; --font-body: Inter, ui-sans-serif, system-ui, sans-serif; --ink-muted: #a3a3a3; --brand-blue: #ffffff; --brand-cyan: #d4d4d4; }
+
+.font-display { font-family: var(--font-display); }
+
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.035em; }
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-background text-foreground; font-family: var(--font-body); }
+}
+
+.project-card { position: relative; }
+.project-card::after { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: #1d4ed8; opacity: 0; transition: opacity .2s ease; }
+.project-card:hover::after { opacity: 1; }
+
+/* Keep the hero closer to an editorial product case study than a synthetic dashboard. */
+.hero-visual > div:first-child { display: none; }
+.hero-visual > div:nth-child(2) { border-color: #cbd5e1 !important; border-radius: 0 !important; background: #ffffff !important; box-shadow: 0 24px 60px rgba(15, 23, 42, .12) !important; }
+.hero-visual > div:nth-child(2) > div:first-child { border-color: #e2e8f0 !important; }
+.hero-visual > div:nth-child(2) > div:nth-child(2) > div:first-child > div:first-child { border-radius: 0 !important; background: transparent !important; color: #1d4ed8 !important; }
+.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { border-color: #dbe3ec !important; border-radius: 0 !important; background: #ffffff !important; }
+.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) p.text-white { color: #172033 !important; }
+.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { background: #edf3f7 !important; border-radius: 0 !important; }
+.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div { display: none; }
+.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)::after { content: ''; display: block; height: 7rem; background: radial-gradient(circle, rgba(255,255,255,.72) 1px, transparent 1.2px), linear-gradient(180deg, rgba(5,5,5,.08), rgba(5,5,5,.76)), url('/projects/ai-computer-lab.png') center / auto, cover, cover no-repeat; background-size: 14px 14px, auto, cover; background-blend-mode: screen, multiply, normal; }
+.hero-visual .text-cyan-100 { color: #526176 !important; }
+.hero-visual .bg-white\/10 { background: #edf2f7 !important; color: #526176 !important; }
+
+/* Deliberately quiet dark canvas with a subtle technical dot field. */
+header { background: rgba(5,5,5,.88) !important; border-color: #262626 !important; }
+header a, header button { color: #d4d4d4 !important; }
+header a:hover { color: #ffffff !important; }
+main, section { color: #f5f5f5; }
+.text-\[\#172033\], .text-slate-950, .text-slate-700, .text-slate-600, .text-slate-500 { color: #d4d4d4 !important; }
+.text-\[\#075985\], .text-\[\#1769aa\], .text-\[\#315efb\] { color: #ffffff !important; }
+.bg-\[\#f7f8fb\], .bg-\[\#eef3f8\], .bg-white { background-color: #0b0b0b !important; }
+.border-\[\#dfe4ec\], .border-\[\#d6dbe3\], .border-\[\#cbd3df\] { border-color: #2a2a2a !important; }
+a.rounded-full.bg-\[\#315efb\], .bg-\[\#315efb\] { background-color: #ffffff !important; color: #050505 !important; }
+a.rounded-full.bg-\[\#315efb\]:hover { background-color: #d4d4d4 !important; }
+
+body { position: relative; isolation: isolate; overflow-x: hidden; background: #050505; }
+
+body::before { content: ''; position: fixed; inset: -18%; z-index: -1; pointer-events: none; opacity: .72; background: radial-gradient(ellipse 52% 42% at 12% 8%, rgba(37, 99, 235, .28), transparent 68%), radial-gradient(ellipse 48% 38% at 88% 18%, rgba(124, 58, 237, .2), transparent 70%), radial-gradient(ellipse 46% 42% at 52% 92%, rgba(8, 145, 178, .16), transparent 70%); filter: blur(48px); animation: aurora-drift 18s ease-in-out infinite alternate; }
+
+body::after { display: none; }
+
+.hero-section { isolation: isolate; }
+.hero-section::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .18; background-image: radial-gradient(circle, rgba(255,255,255,.95) 1px, transparent 1.25px); background-size: 22px 22px; mask-image: linear-gradient(to bottom, black, transparent 82%); }
+.hero-section::after { content: ''; position: absolute; left: 50%; top: 0; z-index: -1; width: min(900px, 100%); height: 620px; pointer-events: none; transform: translateX(-50%); background: radial-gradient(ellipse at center top, rgba(59,130,246,.16), transparent 65%); filter: blur(18px); }
+
+main { position: relative; }
+main::before { content: ''; position: absolute; inset: 0 0 auto; height: 760px; pointer-events: none; opacity: .7; background: radial-gradient(500px circle at var(--spot-x, 50%) 8%, rgba(255,255,255,.1), transparent 62%); mask-image: linear-gradient(to bottom, black, transparent 82%); }
+
+.project-card, #pricing article, #research article { overflow: hidden; }
+.project-card::before, #pricing article::before, #research article::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(420px circle at var(--spot-x, 50%) var(--spot-y, 0%), rgba(255,255,255,.12), transparent 42%); transition: opacity .35s ease; }
+.project-card:hover::before, #pricing article:hover::before, #research article:hover::before { opacity: 1; }
+
+@media (pointer: fine) { main:hover { --spot-x: 50%; --spot-y: 18%; } }
+
+
+@keyframes aurora-drift { 0% { transform: translate3d(-2%, -1%, 0) scale(1); } 50% { transform: translate3d(2%, 1%, 0) scale(1.06); } 100% { transform: translate3d(-1%, 2%, 0) scale(1.02); } }
+.hero-visual > div:nth-child(2), .project-card, .hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { background: #0b0b0b !important; border-color: #2a2a2a !important; color: #f5f5f5 !important; }
+.project-card:hover { border-color: #737373 !important; box-shadow: 0 18px 60px rgba(37, 99, 235, .14); }
+
+#pricing article, #research article { position: relative; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+#pricing article:hover, #research article:hover { transform: translateY(-4px); border-color: #737373 !important; box-shadow: 0 18px 55px rgba(37, 99, 235, .12); }
+
+@media (prefers-reduced-motion: reduce) { #pricing article, #research article, .project-card { transition: none; } }
+
+html.light { color-scheme: light; --background: #f7f8fb; --foreground: #172033; --border: #dfe4ec; --ring: #315efb; }
+html.light body { background-color: #f7f8fb; background-image: radial-gradient(circle, rgba(10,15,25,.78) 1px, transparent 1.25px); background-size: 22px 22px; color: #172033; }
+html.light .theme-surface, html.light #about, html.light #projects { background-image: radial-gradient(circle, rgba(10,15,25,.55) 1px, transparent 1.2px) !important; background-size: 22px 22px !important; }
+html.light #process.theme-surface { background: #ffffff !important; }
+html.light .theme-surface { background: #ffffff !important; color: #172033 !important; border-color: #d6dbe3 !important; }
+html.light .theme-surface .text-white { color: #172033 !important; }
+html.light .theme-surface .text-slate-300, html.light .theme-surface .text-slate-400 { color: #526176 !important; }
+html.light .theme-surface .border-white\/10, html.light .theme-surface .border-white\/15 { border-color: #d6dbe3 !important; }
+html.light .theme-surface .bg-white\/\[0\.035\], html.light .theme-surface .bg-white\/\[0\.04\] { background: #f8fafc !important; }
+html.light #pricing .theme-surface { background: #ffffff !important; }
+html.light #pricing .theme-surface .text-cyan-300 { color: #1d4ed8 !important; }
+html.light body::before { opacity: .45; background: radial-gradient(ellipse 52% 42% at 12% 8%, rgba(59,130,246,.14), transparent 68%), radial-gradient(ellipse 48% 38% at 88% 18%, rgba(124,58,237,.1), transparent 70%); }
+html.light body::after { display: none; }
+html.light .hero-section::before { opacity: .24; background-image: radial-gradient(circle, rgba(10,15,25,.78) 1px, transparent 1.25px); }
+html.light .hero-section::after { background: radial-gradient(ellipse at center top, rgba(59,130,246,.11), transparent 65%); }
+html.light header nav { background: rgba(15,23,42,.04); border-color: #d6dbe3; }
+html.light header nav a { color: #526176 !important; }
+html.light header nav a:hover { background: rgba(15,23,42,.08); color: #172033 !important; }
+html.light header { background: rgba(247,248,251,.88) !important; border-color: #dfe4ec !important; }
+html.light header a, html.light header button { color: #475569 !important; }
+html.light header a:hover { color: #1d4ed8 !important; }
+html.light main, html.light section { color: #172033; }
+html.light .text-\[\#172033\], html.light .text-slate-950, html.light .text-slate-700, html.light .text-slate-600, html.light .text-slate-500 { color: #172033 !important; }
+html.light .text-slate-400, html.light .text-slate-300 { color: #526176 !important; }
+html.light .bg-\[\#f7f8fb\], html.light .bg-\[\#eef3f8\], html.light .bg-white { background-color: #ffffff !important; }
+html.light .border-\[\#dfe4ec\], html.light .border-\[\#d6dbe3\], html.light .border-\[\#cbd3df\] { border-color: #d6dbe3 !important; }
+html.light .project-card, html.light #pricing article, html.light #research article { background: #ffffff !important; border-color: #d6dbe3 !important; color: #172033 !important; }
+html.light .hero-visual > div:nth-child(2) { background: #ffffff !important; border-color: #cbd5e1 !important; }
+html.light .hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { background: #ffffff !important; border-color: #dbe3ec !important; }
+html.light .hero-visual p.text-white, html.light .hero-visual .text-white { color: #172033 !important; }
+html.light .hero-visual .text-slate-500, html.light .hero-visual .text-slate-700 { color: #526176 !important; }
+html.light .hero-visual .bg-white\/10 { background: #eef2f7 !important; }
+html.light .hero-visual .text-cyan-100 { color: #526176 !important; }
+html.light .project-card h3, html.light .project-card p, html.light .project-card span { color: inherit; }
+html.light .border-white\/10, html.light .border-white\/15 { border-color: #d6dbe3 !important; }
+html.light .bg-white\/\[0\.035\], html.light .bg-white\/\[0\.04\] { background: #ffffff !important; }
+html.light .text-white { color: #172033 !important; }
+html.light a.rounded-full.bg-\[\#315efb\], html.light .bg-\[\#315efb\] { background-color: #315efb !important; color: #ffffff !important; }
+html.light .hero-visual button, html.light .hero-visual a { color: inherit; }
+
+/* One continuous canvas: cards provide hierarchy, not full-width section blocks. */
+main > section { background-color: transparent !important; background-image: none !important; }
+main > section.hero-section, main > section.theme-surface { background-color: transparent !important; }
+html.light main > section.theme-surface { background-color: transparent !important; }
+html.light body { background-image: none; }
+html.light main > section { background-color: transparent !important; background-image: none !important; }
+html.light main > section.hero-section::before { background-image: radial-gradient(circle, rgba(10,15,25,.78) 1px, transparent 1.25px); }
+
+
+.project-card h3, .project-card p, .project-card span, .hero-visual p, .hero-visual span { color: inherit; }
+.hero-visual .text-cyan-100, .hero-visual .bg-white\/10 { color: #a3a3a3 !important; background: #171717 !important; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } body::before { animation: none; } }
