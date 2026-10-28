@@ -206,7 +206,7 @@ function TypingHeroLine() {
 
   return (
     <>
-      {text || "\\u00a0"}
+      {text || "\u00a0"}
       <span
         aria-hidden="true"
         className="ml-1 inline-block h-[0.82em] w-px translate-y-[0.08em] bg-[#315efb] align-baseline motion-safe:animate-pulse"
