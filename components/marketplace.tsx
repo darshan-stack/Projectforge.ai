@@ -17,18 +17,19 @@ import {
 } from "lucide-react";
 import { projects, domains, type Project } from "@/lib/projects";
 import { getWhatsAppHref, siteConfig } from "@/lib/config";
+import { Button } from "@/components/ui/button";
 
 function Logo() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2.5 font-semibold tracking-tight"
+      className="group flex items-center gap-2.5 font-semibold tracking-tight"
     >
-      <span className="grid size-8 place-items-center rounded-lg bg-[#315efb] text-sm font-black text-white">
+      <span className="grid size-8 place-items-center rounded-lg border border-white/15 bg-white text-sm font-black text-black shadow-[0_0_22px_rgba(255,255,255,0.08)] transition-transform group-hover:scale-105">
         P
       </span>
-      <span className="text-[15px] text-[#172033]">
-        ProjectForge <span className="text-[#1769aa]">AI</span>
+      <span className="text-[15px] text-foreground">
+        ProjectForge <span className="text-indigo-300">AI</span>
       </span>
     </Link>
   );
@@ -52,15 +53,17 @@ function ThemeToggle() {
   }
 
   return (
-    <button
+    <Button
       type="button"
+      variant="outline"
+      size="icon"
       onClick={toggleTheme}
       aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
       title={isLight ? "Switch to dark theme" : "Switch to light theme"}
-      className="grid size-9 place-items-center rounded-full border border-white/15 text-slate-300 transition hover:border-white/40 hover:text-white"
+      className="rounded-full border-white/15 bg-transparent text-slate-300 hover:border-white/40 hover:bg-white/[0.06] hover:text-white"
     >
       {isLight ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
-    </button>
+    </Button>
   );
 }
 
@@ -96,12 +99,11 @@ function Nav() {
           >
             {siteConfig.phoneDisplay}
           </a>
-          <a
-            href="#contact"
-            className="hidden rounded-full border border-white/15 bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-slate-200 sm:block"
-          >
-            Explore projects <ArrowUpRight className="ml-1 inline size-4" />
-          </a>
+          <Button asChild className="hidden rounded-full bg-white px-4 text-slate-950 hover:bg-zinc-200 sm:inline-flex">
+            <a href="#contact">
+              Explore projects <ArrowUpRight aria-hidden="true" />
+            </a>
+          </Button>
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
@@ -123,12 +125,9 @@ function Nav() {
               {label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="w-fit rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950"
-          >
-            Explore projects
-          </a>
+          <Button asChild className="w-fit rounded-full bg-white text-slate-950 hover:bg-zinc-200">
+            <a href="#contact">Explore projects</a>
+          </Button>
         </nav>
       )}
     </header>
@@ -436,22 +435,16 @@ export function Marketplace() {
                 academic level.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  href="#projects"
-                  className="rounded-full bg-[#315efb] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#dbeafe]"
-                >
-                  Explore projects{" "}
-                  <ArrowUpRight className="ml-1 inline size-4" />
-                </a>
-                <a
-                  href={getWhatsAppHref()}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#cbd3df] px-5 py-3 text-sm font-semibold text-[#172033] transition hover:border-cyan-300/50 hover:bg-white/[0.05]"
-                >
-                  Discuss your idea{" "}
-                  <MessageCircle className="ml-1 inline size-4" />
-                </a>
+                <Button asChild size="lg" className="rounded-full bg-white px-5 text-sm font-semibold text-black shadow-[0_0_28px_rgba(255,255,255,0.08)] hover:bg-zinc-200">
+                  <a href="#projects">
+                    Explore projects <ArrowUpRight aria-hidden="true" />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="rounded-full border-white/15 bg-white/[0.025] px-5 text-sm font-semibold text-foreground hover:border-white/30 hover:bg-white/[0.07]">
+                  <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
+                    Discuss your idea <MessageCircle aria-hidden="true" />
+                  </a>
+                </Button>
               </div>
               <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-slate-500">
                 <span>
@@ -607,25 +600,33 @@ export function Marketplace() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search projects"
-                  className="w-full rounded-lg border border-white/10 bg-white/[0.04] py-2.5 pl-9 pr-3 text-sm text-white outline-none placeholder:text-slate-600 focus:border-cyan-300/50"
+                  className="h-10 w-full rounded-lg border border-white/10 bg-white/[0.04] py-2.5 pl-9 pr-3 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus-visible:border-indigo-400 focus-visible:ring-2 focus-visible:ring-indigo-400/30"
                 />
               </div>
             </div>
             <div className="mt-8 flex gap-2 overflow-x-auto pb-2">
-              <button
+              <Button
+                type="button"
+                size="sm"
+                variant={activeDomain === "All" ? "default" : "outline"}
                 onClick={() => setActiveDomain("All")}
-                className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium ${activeDomain === "All" ? "bg-white text-slate-950" : "border border-white/10 text-slate-600 hover:text-[#315efb]"}`}
+                aria-pressed={activeDomain === "All"}
+                className={`whitespace-nowrap rounded-full ${activeDomain === "All" ? "border-white bg-white text-black hover:bg-zinc-200" : "border-white/10 bg-transparent text-muted-foreground hover:border-white/25 hover:bg-white/[0.05] hover:text-foreground"}`}
               >
-                <Filter className="mr-1 inline size-3" /> All projects
-              </button>
+                <Filter aria-hidden="true" /> All projects
+              </Button>
               {domains.map((domain) => (
-                <button
+                <Button
                   key={domain}
+                  type="button"
+                  size="sm"
+                  variant={activeDomain === domain ? "default" : "outline"}
                   onClick={() => setActiveDomain(domain)}
-                  className={`whitespace-nowrap rounded-full px-3.5 py-2 text-xs font-medium ${activeDomain === domain ? "bg-white text-slate-950" : "border border-white/10 text-slate-600 hover:text-[#315efb]"}`}
+                  aria-pressed={activeDomain === domain}
+                  className={`whitespace-nowrap rounded-full ${activeDomain === domain ? "border-white bg-white text-black hover:bg-zinc-200" : "border-white/10 bg-transparent text-muted-foreground hover:border-white/25 hover:bg-white/[0.05] hover:text-foreground"}`}
                 >
                   {domain}
-                </button>
+                </Button>
               ))}
             </div>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -639,13 +640,11 @@ export function Marketplace() {
               </div>
             )}
             <div className="mt-10 text-center">
-              <Link
-                href="/projects"
-                className="text-sm font-semibold text-[#1769aa] hover:text-[#1769aa]"
-              >
-                View the full catalog{" "}
-                <ArrowUpRight className="ml-1 inline size-4" />
-              </Link>
+              <Button asChild variant="link" className="text-sm font-semibold text-indigo-300 hover:text-white">
+                <Link href="/projects">
+                  View the full catalog <ArrowUpRight aria-hidden="true" />
+                </Link>
+              </Button>
             </div>
           </div>
         </section>
@@ -934,21 +933,14 @@ export function Marketplace() {
               Get a clear project scope and a customized quotation.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link
-                href="/projects"
-                className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950"
-              >
-                Explore projects
-              </Link>
-              <a
-                href={getWhatsAppHref()}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-slate-950"
-              >
-                <MessageCircle className="mr-1 inline size-4" /> Chat on
-                WhatsApp
-              </a>
+              <Button asChild size="lg" className="rounded-full bg-white px-5 text-black hover:bg-zinc-200">
+                <Link href="/projects">Explore projects</Link>
+              </Button>
+              <Button asChild size="lg" className="rounded-full bg-emerald-500 px-5 text-emerald-950 hover:bg-emerald-400">
+                <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
+                  <MessageCircle aria-hidden="true" /> Chat on WhatsApp
+                </a>
+              </Button>
             </div>
           </div>
         </section>

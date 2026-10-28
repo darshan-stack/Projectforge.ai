@@ -634,3 +634,62 @@ html:not(.light) ::selection {
 html.light {
   color-scheme: light;
 }
+
+/* shadcn/ui-aligned polish for ProjectForge's existing base-nova setup. */
+html:not(.light) {
+  --background: #000;
+  --foreground: #f5f5f5;
+  --border: #262626;
+  --ring: #818cf8;
+  --radius: .75rem;
+  --card: #080808;
+  --muted: #111113;
+  --muted-foreground: #a1a1aa;
+}
+
+html:not(.light) .project-card,
+html:not(.light) #pricing article,
+html:not(.light) #research article {
+  border-color: #262626 !important;
+  background: #080808 !important;
+  border-radius: 1rem;
+  box-shadow: 0 1px 0 rgba(255,255,255,.025), 0 14px 44px rgba(0,0,0,.28);
+}
+
+html:not(.light) .project-card:hover,
+html:not(.light) #pricing article:hover,
+html:not(.light) #research article:hover {
+  border-color: #49445f !important;
+  background: #0b0b0c !important;
+  box-shadow: 0 18px 55px rgba(0,0,0,.44), 0 0 28px rgba(129,140,248,.07);
+}
+
+html:not(.light) input:focus-visible,
+html:not(.light) textarea:focus-visible,
+html:not(.light) select:focus-visible {
+  border-color: #818cf8 !important;
+  box-shadow: 0 0 0 3px rgba(129,140,248,.18);
+}
+
+html:not(.light) button[data-slot="button"]:focus-visible,
+html:not(.light) a[data-slot="button"]:focus-visible {
+  outline: 2px solid #a5b4fc;
+  outline-offset: 3px;
+}
+
+html:not(.light) button[data-slot="button"][data-variant="outline"] {
+  border-color: #303036;
+}
+
+html:not(.light) button[data-slot="button"][data-variant="outline"]:hover {
+  border-color: #484852;
+}
+
+html.light {
+  --background: #f8fafc;
+  --foreground: #172033;
+  --border: #dbe2ec;
+  --ring: #6366f1;
+  --radius: .75rem;
+}
+
