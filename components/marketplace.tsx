@@ -23,13 +23,13 @@ function Logo() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-2.5 font-semibold tracking-tight"
+      className="group flex items-center gap-2.5 font-semibold tracking-tight"
     >
-      <span className="grid size-8 place-items-center rounded-lg bg-[#315efb] text-sm font-black text-white">
+      <span className="grid size-8 place-items-center rounded-lg border border-white/15 bg-white text-sm font-black text-black shadow-[0_0_22px_rgba(255,255,255,0.08)] transition-transform group-hover:scale-105">
         P
       </span>
-      <span className="text-[15px] text-[#172033]">
-        ProjectForge <span className="text-[#1769aa]">AI</span>
+      <span className="text-[15px] text-foreground">
+        ProjectForge <span className="text-indigo-300">AI</span>
       </span>
     </Link>
   );
