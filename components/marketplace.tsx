@@ -435,22 +435,16 @@ export function Marketplace() {
                 academic level.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  href="#projects"
-                  className="rounded-full bg-[#315efb] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#dbeafe]"
-                >
-                  Explore projects{" "}
-                  <ArrowUpRight className="ml-1 inline size-4" />
-                </a>
-                <a
-                  href={getWhatsAppHref()}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#cbd3df] px-5 py-3 text-sm font-semibold text-[#172033] transition hover:border-cyan-300/50 hover:bg-white/[0.05]"
-                >
-                  Discuss your idea{" "}
-                  <MessageCircle className="ml-1 inline size-4" />
-                </a>
+                <Button asChild size="lg" className="rounded-full bg-white px-5 text-sm font-semibold text-black shadow-[0_0_28px_rgba(255,255,255,0.08)] hover:bg-zinc-200">
+                  <a href="#projects">
+                    Explore projects <ArrowUpRight aria-hidden="true" />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="rounded-full border-white/15 bg-white/[0.025] px-5 text-sm font-semibold text-foreground hover:border-white/30 hover:bg-white/[0.07]">
+                  <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
+                    Discuss your idea <MessageCircle aria-hidden="true" />
+                  </a>
+                </Button>
               </div>
               <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-slate-500">
                 <span>
