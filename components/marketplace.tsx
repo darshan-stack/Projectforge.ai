@@ -99,13 +99,13 @@ function Nav() {
           >
             {siteConfig.phoneDisplay}
           </a>
-          <Button asChild className="hidden rounded-full bg-white px-4 text-slate-950 hover:bg-zinc-200 sm:inline-flex">
-            <a href="#contact">
-              Explore projects <ArrowUpRight aria-hidden="true" />
-            </a>
+          <Button render={<a href="#contact" />} className="hidden rounded-full bg-white px-4 text-slate-950 hover:bg-zinc-200 sm:inline-flex">
+            Explore projects <ArrowUpRight aria-hidden="true" />
           </Button>
           <button
             aria-label="Toggle menu"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
             onClick={() => setOpen(!open)}
             className="rounded-lg p-2 text-slate-700 lg:hidden"
           >
@@ -113,8 +113,7 @@ function Nav() {
           </button>
         </div>
       </div>
-      {open && (
-        <nav className="flex flex-col gap-5 border-t border-[#dfe4ec] px-5 py-6 lg:hidden">
+      <nav id="mobile-navigation" aria-label="Mobile navigation" className={`${open ? "flex" : "hidden"} flex-col gap-5 border-t border-[#dfe4ec] px-5 py-6 lg:hidden`}>
           {items.map(([label, href]) => (
             <a
               onClick={() => setOpen(false)}
@@ -125,18 +124,17 @@ function Nav() {
               {label}
             </a>
           ))}
-          <Button asChild className="w-fit rounded-full bg-white text-slate-950 hover:bg-zinc-200">
-            <a href="#contact">Explore projects</a>
+          <Button render={<a href="#contact" />} className="w-fit rounded-full bg-white text-slate-950 hover:bg-zinc-200">
+            Explore projects
           </Button>
-        </nav>
-      )}
+      </nav>
     </header>
   );
 }
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="project-card group overflow-hidden border border-[#d6dbe3] bg-white transition duration-300 hover:-translate-y-1 hover:border-[#1d4ed8]">
+    <article className="project-card reveal-on-scroll group overflow-hidden border border-[#d6dbe3] bg-white transition duration-300 hover:-translate-y-1 hover:border-[#1d4ed8]">
       <div className="relative h-48 overflow-hidden bg-[#e8edf3]">
         {project.image && (
           <img
@@ -193,24 +191,29 @@ function TypingHeroLine() {
   const [text, setText] = useState("");
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setText(fullText);
+      return;
+    }
+
     let index = 0;
     const timer = window.setInterval(() => {
       index += 1;
       setText(fullText.slice(0, index));
       if (index === fullText.length) window.clearInterval(timer);
-    }, 58);
+    }, 42);
 
     return () => window.clearInterval(timer);
   }, []);
 
   return (
-    <>
+    <span aria-hidden="true">
       {text || "\u00a0"}
       <span
         aria-hidden="true"
         className="ml-1 inline-block h-[0.82em] w-px translate-y-[0.08em] bg-[#315efb] align-baseline motion-safe:animate-pulse"
       />
-    </>
+    </span>
   );
 }
 
@@ -233,7 +236,7 @@ function AcademicTracks() {
   ];
   return (
     <section
-      id="levels"
+      id="research-track"
       className="theme-surface relative overflow-hidden border-y border-white/10 bg-[#090d14] px-5 py-20 lg:px-8"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,.16),transparent_34%),radial-gradient(circle_at_90%_70%,rgba(124,58,237,.13),transparent_32%)]" />
@@ -320,7 +323,7 @@ function AboutServices() {
   return (
     <>
       <section
-        id="research"
+        id="writing"
         className="theme-surface order-6 border-y border-white/10 bg-[#0b111c] px-5 py-20 lg:px-8"
       >
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
@@ -426,7 +429,7 @@ export function Marketplace() {
               <div className="mb-6 inline-flex items-center gap-2 border-l-2 border-[#1d4ed8] pl-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#075985]">
                 Curated engineering projects
               </div>
-              <h1 className="max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-[-0.05em] text-[#172033] sm:text-6xl lg:text-7xl">
+              <h1 aria-label="Your next big project starts here." className="max-w-3xl font-display text-5xl font-semibold leading-[1.05] tracking-[-0.05em] text-[#172033] sm:text-6xl lg:text-7xl">
                 <TypingHeroLine />
               </h1>
               <p className="mt-7 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
@@ -435,15 +438,11 @@ export function Marketplace() {
                 academic level.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="rounded-full bg-white px-5 text-sm font-semibold text-black shadow-[0_0_28px_rgba(255,255,255,0.08)] hover:bg-zinc-200">
-                  <a href="#projects">
-                    Explore projects <ArrowUpRight aria-hidden="true" />
-                  </a>
+                <Button render={<a href="#projects" />} size="lg" className="rounded-full bg-white px-5 text-sm font-semibold text-black shadow-[0_0_28px_rgba(255,255,255,0.08)] hover:bg-zinc-200">
+                  Explore projects <ArrowUpRight aria-hidden="true" />
                 </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full border-white/15 bg-white/[0.025] px-5 text-sm font-semibold text-foreground hover:border-white/30 hover:bg-white/[0.07]">
-                  <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
-                    Discuss your idea <MessageCircle aria-hidden="true" />
-                  </a>
+                <Button render={<a href={getWhatsAppHref()} target="_blank" rel="noreferrer" />} size="lg" variant="outline" className="rounded-full border-white/15 bg-white/[0.025] px-5 text-sm font-semibold text-foreground hover:border-white/30 hover:bg-white/[0.07]">
+                  Discuss your idea <MessageCircle aria-hidden="true" />
                 </Button>
               </div>
               <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-slate-500">
@@ -630,7 +629,7 @@ export function Marketplace() {
               ))}
             </div>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {filtered.slice(0, 6).map((project) => (
+              {(query || activeDomain !== "All" ? filtered : filtered.slice(0, 6)).map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
             </div>
@@ -640,10 +639,8 @@ export function Marketplace() {
               </div>
             )}
             <div className="mt-10 text-center">
-              <Button asChild variant="link" className="text-sm font-semibold text-indigo-300 hover:text-white">
-                <Link href="/projects">
-                  View the full catalog <ArrowUpRight aria-hidden="true" />
-                </Link>
+              <Button render={<Link href="/projects" />} variant="link" className="text-sm font-semibold text-indigo-300 hover:text-white">
+                View the full catalog <ArrowUpRight aria-hidden="true" />
               </Button>
             </div>
           </div>
@@ -770,7 +767,7 @@ export function Marketplace() {
               ].map((plan) => (
                 <article
                   key={plan.name}
-                  className={`relative flex flex-col border p-6 sm:p-8 ${plan.featured ? "theme-surface border-[#315efb] bg-[#0b1220] text-white shadow-[0_20px_50px_rgba(37,99,235,.16)]" : "border-[#d6dbe3] bg-white text-[#172033]"}`}
+                  className={`reveal-on-scroll relative flex flex-col border p-6 sm:p-8 ${plan.featured ? "theme-surface border-[#315efb] bg-[#0b1220] text-white shadow-[0_20px_50px_rgba(37,99,235,.16)]" : "border-[#d6dbe3] bg-white text-[#172033]"}`}
                 >
                   {plan.featured && (
                     <span className="absolute -top-3 left-6 bg-[#315efb] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white">
@@ -866,7 +863,7 @@ export function Marketplace() {
               ].map((item, i) => (
                 <div
                   key={item}
-                  className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-4 text-sm text-slate-700"
+                  className="reveal-on-scroll flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-4 text-sm text-slate-700"
                 >
                   <span className="grid size-7 place-items-center rounded-lg bg-cyan-300/10 text-xs text-[#1769aa]">
                     0{i + 1}
@@ -933,13 +930,11 @@ export function Marketplace() {
               Get a clear project scope and a customized quotation.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button asChild size="lg" className="rounded-full bg-white px-5 text-black hover:bg-zinc-200">
-                <Link href="/projects">Explore projects</Link>
+              <Button render={<Link href="/projects" />} size="lg" className="rounded-full bg-white px-5 text-black hover:bg-zinc-200">
+                Explore projects
               </Button>
-              <Button asChild size="lg" className="rounded-full bg-emerald-500 px-5 text-emerald-950 hover:bg-emerald-400">
-                <a href={getWhatsAppHref()} target="_blank" rel="noreferrer">
-                  <MessageCircle aria-hidden="true" /> Chat on WhatsApp
-                </a>
+              <Button render={<a href={getWhatsAppHref()} target="_blank" rel="noreferrer" />} size="lg" className="rounded-full bg-emerald-500 px-5 text-emerald-950 hover:bg-emerald-400">
+                <MessageCircle aria-hidden="true" /> Chat on WhatsApp
               </Button>
             </div>
           </div>

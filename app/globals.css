@@ -15,681 +15,255 @@
   --radius-xl: calc(var(--radius) * 1.4);
 }
 
-:root { color-scheme: dark; --background: #050505; --foreground: #f5f5f5; --border: #262626; --ring: #ffffff; --radius: .625rem; --font-display: Georgia, 'Times New Roman', Times, serif; --font-body: Inter, ui-sans-serif, system-ui, sans-serif; --ink-muted: #a3a3a3; --brand-blue: #ffffff; --brand-cyan: #d4d4d4; }
-
-.font-display { font-family: var(--font-display); }
-
-h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.035em; }
+:root {
+  color-scheme: dark;
+  --background: #080a10;
+  --foreground: #f5f6fb;
+  --border: rgba(148, 163, 184, .18);
+  --ring: #a78bfa;
+  --radius: .875rem;
+  --muted: #a1a1aa;
+  --brand: #9b87ff;
+  --brand-blue: #7c9cff;
+  --surface: #0e111a;
+  --surface-raised: #121621;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
+}
 
 @layer base {
   * { @apply border-border outline-ring/50; }
   html { scroll-behavior: smooth; }
-  body { @apply bg-background text-foreground; font-family: var(--font-body); }
+  body {
+    @apply bg-background text-foreground;
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
+    min-width: 320px;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    background: var(--background);
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -.035em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  a, button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+  ::selection { color: #fff; background: rgba(124, 92, 246, .62); }
 }
 
-.project-card { position: relative; }
-.project-card::after { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: #1d4ed8; opacity: 0; transition: opacity .2s ease; }
-.project-card:hover::after { opacity: 1; }
-
-/* Keep the hero closer to an editorial product case study than a synthetic dashboard. */
-.hero-visual > div:first-child { display: none; }
-.hero-visual > div:nth-child(2) { border-color: #cbd5e1 !important; border-radius: 0 !important; background: #ffffff !important; box-shadow: 0 24px 60px rgba(15, 23, 42, .12) !important; }
-.hero-visual > div:nth-child(2) > div:first-child { border-color: #e2e8f0 !important; }
-.hero-visual > div:nth-child(2) > div:nth-child(2) > div:first-child > div:first-child { border-radius: 0 !important; background: transparent !important; color: #1d4ed8 !important; }
-.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { border-color: #dbe3ec !important; border-radius: 0 !important; background: #ffffff !important; }
-.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) p.text-white { color: #172033 !important; }
-.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { background: #edf3f7 !important; border-radius: 0 !important; }
-.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div { display: none; }
-.hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)::after { content: ''; display: block; height: 7rem; background: radial-gradient(circle, rgba(255,255,255,.72) 1px, transparent 1.2px), linear-gradient(180deg, rgba(5,5,5,.08), rgba(5,5,5,.76)), url('/projects/ai-computer-lab.png') center / auto, cover, cover no-repeat; background-size: 14px 14px, auto, cover; background-blend-mode: screen, multiply, normal; }
-.hero-visual .text-cyan-100 { color: #526176 !important; }
-.hero-visual .bg-white\/10 { background: #edf2f7 !important; color: #526176 !important; }
-
-/* Deliberately quiet dark canvas with a subtle technical dot field. */
-header { background: rgba(5,5,5,.88) !important; border-color: #262626 !important; }
-header a, header button { color: #d4d4d4 !important; }
-header a:hover { color: #ffffff !important; }
-main, section { color: #f5f5f5; }
-.text-\[\#172033\], .text-slate-950, .text-slate-700, .text-slate-600, .text-slate-500 { color: #d4d4d4 !important; }
-.text-\[\#075985\], .text-\[\#1769aa\], .text-\[\#315efb\] { color: #ffffff !important; }
-.bg-\[\#f7f8fb\], .bg-\[\#eef3f8\], .bg-white { background-color: #0b0b0b !important; }
-.border-\[\#dfe4ec\], .border-\[\#d6dbe3\], .border-\[\#cbd3df\] { border-color: #2a2a2a !important; }
-a.rounded-full.bg-\[\#315efb\], .bg-\[\#315efb\] { background-color: #ffffff !important; color: #050505 !important; }
-a.rounded-full.bg-\[\#315efb\]:hover { background-color: #d4d4d4 !important; }
-
-body { position: relative; isolation: isolate; overflow-x: hidden; background: #050505; }
-
-body::before { content: ''; position: fixed; inset: -18%; z-index: -1; pointer-events: none; opacity: .72; background: radial-gradient(ellipse 52% 42% at 12% 8%, rgba(37, 99, 235, .28), transparent 68%), radial-gradient(ellipse 48% 38% at 88% 18%, rgba(124, 58, 237, .2), transparent 70%), radial-gradient(ellipse 46% 42% at 52% 92%, rgba(8, 145, 178, .16), transparent 70%); filter: blur(48px); animation: aurora-drift 18s ease-in-out infinite alternate; }
-
-body::after { display: none; }
-
-.hero-section { isolation: isolate; }
-.hero-section::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .18; background-image: radial-gradient(circle, rgba(255,255,255,.95) 1px, transparent 1.25px); background-size: 22px 22px; mask-image: linear-gradient(to bottom, black, transparent 82%); }
-.hero-section::after { content: ''; position: absolute; left: 50%; top: 0; z-index: -1; width: min(900px, 100%); height: 620px; pointer-events: none; transform: translateX(-50%); background: radial-gradient(ellipse at center top, rgba(59,130,246,.16), transparent 65%); filter: blur(18px); }
-
-main { position: relative; }
-main::before { content: ''; position: absolute; inset: 0 0 auto; height: 760px; pointer-events: none; opacity: .7; background: radial-gradient(500px circle at var(--spot-x, 50%) 8%, rgba(255,255,255,.1), transparent 62%); mask-image: linear-gradient(to bottom, black, transparent 82%); }
-
-.project-card, #pricing article, #research article { overflow: hidden; }
-.project-card::before, #pricing article::before, #research article::before { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(420px circle at var(--spot-x, 50%) var(--spot-y, 0%), rgba(255,255,255,.12), transparent 42%); transition: opacity .35s ease; }
-.project-card:hover::before, #pricing article:hover::before, #research article:hover::before { opacity: 1; }
-
-@media (pointer: fine) { main:hover { --spot-x: 50%; --spot-y: 18%; } }
-
-
-@keyframes aurora-drift { 0% { transform: translate3d(-2%, -1%, 0) scale(1); } 50% { transform: translate3d(2%, 1%, 0) scale(1.06); } 100% { transform: translate3d(-1%, 2%, 0) scale(1.02); } }
-.hero-visual > div:nth-child(2), .project-card, .hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { background: #0b0b0b !important; border-color: #2a2a2a !important; color: #f5f5f5 !important; }
-.project-card:hover { border-color: #737373 !important; box-shadow: 0 18px 60px rgba(37, 99, 235, .14); }
-
-#pricing article, #research article { position: relative; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
-#pricing article:hover, #research article:hover { transform: translateY(-4px); border-color: #737373 !important; box-shadow: 0 18px 55px rgba(37, 99, 235, .12); }
-
-@media (prefers-reduced-motion: reduce) { #pricing article, #research article, .project-card { transition: none; } }
-
-html.light { color-scheme: light; --background: #f7f8fb; --foreground: #172033; --border: #dfe4ec; --ring: #315efb; }
-html.light body { background-color: #f7f8fb; background-image: radial-gradient(circle, rgba(10,15,25,.78) 1px, transparent 1.25px); background-size: 22px 22px; color: #172033; }
-html.light .theme-surface, html.light #about, html.light #projects { background-image: radial-gradient(circle, rgba(10,15,25,.55) 1px, transparent 1.2px) !important; background-size: 22px 22px !important; }
-html.light #process.theme-surface { background: #ffffff !important; }
-html.light .theme-surface { background: #ffffff !important; color: #172033 !important; border-color: #d6dbe3 !important; }
-html.light .theme-surface .text-white { color: #172033 !important; }
-html.light .theme-surface .text-slate-300, html.light .theme-surface .text-slate-400 { color: #526176 !important; }
-html.light .theme-surface .border-white\/10, html.light .theme-surface .border-white\/15 { border-color: #d6dbe3 !important; }
-html.light .theme-surface .bg-white\/\[0\.035\], html.light .theme-surface .bg-white\/\[0\.04\] { background: #f8fafc !important; }
-html.light #pricing .theme-surface { background: #ffffff !important; }
-html.light #pricing .theme-surface .text-cyan-300 { color: #1d4ed8 !important; }
-html.light body::before { opacity: .45; background: radial-gradient(ellipse 52% 42% at 12% 8%, rgba(59,130,246,.14), transparent 68%), radial-gradient(ellipse 48% 38% at 88% 18%, rgba(124,58,237,.1), transparent 70%); }
-html.light body::after { display: none; }
-html.light .hero-section::before { opacity: .24; background-image: radial-gradient(circle, rgba(10,15,25,.78) 1px, transparent 1.25px); }
-html.light .hero-section::after { background: radial-gradient(ellipse at center top, rgba(59,130,246,.11), transparent 65%); }
-html.light header nav { background: rgba(15,23,42,.04); border-color: #d6dbe3; }
-html.light header nav a { color: #526176 !important; }
-html.light header nav a:hover { background: rgba(15,23,42,.08); color: #172033 !important; }
-html.light header { background: rgba(247,248,251,.88) !important; border-color: #dfe4ec !important; }
-html.light header a, html.light header button { color: #475569 !important; }
-html.light header a:hover { color: #1d4ed8 !important; }
-html.light main, html.light section { color: #172033; }
-html.light .text-\[\#172033\], html.light .text-slate-950, html.light .text-slate-700, html.light .text-slate-600, html.light .text-slate-500 { color: #172033 !important; }
-html.light .text-slate-400, html.light .text-slate-300 { color: #526176 !important; }
-html.light .bg-\[\#f7f8fb\], html.light .bg-\[\#eef3f8\], html.light .bg-white { background-color: #ffffff !important; }
-html.light .border-\[\#dfe4ec\], html.light .border-\[\#d6dbe3\], html.light .border-\[\#cbd3df\] { border-color: #d6dbe3 !important; }
-html.light .project-card, html.light #pricing article, html.light #research article { background: #ffffff !important; border-color: #d6dbe3 !important; color: #172033 !important; }
-html.light .hero-visual > div:nth-child(2) { background: #ffffff !important; border-color: #cbd5e1 !important; }
-html.light .hero-visual > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) { background: #ffffff !important; border-color: #dbe3ec !important; }
-html.light .hero-visual p.text-white, html.light .hero-visual .text-white { color: #172033 !important; }
-html.light .hero-visual .text-slate-500, html.light .hero-visual .text-slate-700 { color: #526176 !important; }
-html.light .hero-visual .bg-white\/10 { background: #eef2f7 !important; }
-html.light .hero-visual .text-cyan-100 { color: #526176 !important; }
-html.light .project-card h3, html.light .project-card p, html.light .project-card span { color: inherit; }
-html.light .border-white\/10, html.light .border-white\/15 { border-color: #d6dbe3 !important; }
-html.light .bg-white\/\[0\.035\], html.light .bg-white\/\[0\.04\] { background: #ffffff !important; }
-html.light .text-white { color: #172033 !important; }
-html.light a.rounded-full.bg-\[\#315efb\], html.light .bg-\[\#315efb\] { background-color: #315efb !important; color: #ffffff !important; }
-html.light .hero-visual button, html.light .hero-visual a { color: inherit; }
-
-/* One continuous canvas: cards provide hierarchy, not full-width section blocks. */
-main > section { background-color: transparent !important; background-image: none !important; }
-main > section.hero-section, main > section.theme-surface { background-color: transparent !important; }
-html.light main > section.theme-surface { background-color: transparent !important; }
-html.light body { background-image: none; }
-html.light main > section { background-color: transparent !important; background-image: none !important; }
-html.light main > section.hero-section::before { background-image: radial-gradient(circle, rgba(10,15,25,.78) 1px, transparent 1.25px); }
-
-
-.project-card h3, .project-card p, .project-card span, .hero-visual p, .hero-visual span { color: inherit; }
-.hero-visual .text-cyan-100, .hero-visual .bg-white\/10 { color: #a3a3a3 !important; background: #171717 !important; }
-
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } body::before { animation: none; } }
-
-
-/* ProjectForge visual refresh — cohesive contrast, accessible controls, and AI-inspired ambient effects. */
-:root {
-  --background: #070b14;
-  --foreground: #f4f7ff;
-  --border: rgba(148, 163, 184, .2);
-  --ring: #8b5cf6;
-  --surface-1: rgba(15, 23, 42, .82);
-  --surface-2: rgba(20, 30, 52, .74);
-  --muted: #a8b4c8;
-  --muted-strong: #c6d0e0;
-  --accent: #8b5cf6;
-  --accent-bright: #60a5fa;
-  --accent-cyan: #67e8f9;
-}
-
-body {
-  background: #070b14;
-  color: var(--foreground);
-  font-family: var(--font-body);
-  line-height: 1.6;
-}
-
-h1, h2, h3 {
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
-}
-
-::selection {
-  color: #fff;
-  background: rgba(124, 58, 237, .68);
-}
-
-/* Restore readable copy in the dark theme; the previous rules made slate text too pale
-   and changed light buttons to dark surfaces while leaving their dark text in place. */
-.text-slate-500,
-.text-slate-600 { color: #a8b4c8 !important; }
-
-.text-slate-700 { color: #c6d0e0 !important; }
-
-.text-\[\#172033\] { color: #e8edfa !important; }
-.text-\[\#075985\],
-.text-\[\#1769aa\],
-.text-\[\#315efb\] { color: #a5b4fc !important; }
-
-.bg-\[\#f7f8fb\],
-.bg-\[\#eef3f8\] { background-color: transparent !important; }
-
-/* Neutral surfaces stay dark, but true white CTA buttons stay white with dark, legible labels. */
-.bg-white {
-  background-color: #f8fafc !important;
-  color: #0b1020 !important;
-}
-
-.bg-white.text-slate-950,
-a.bg-white,
-button.bg-white {
-  background: linear-gradient(135deg, #ffffff, #e8edff) !important;
-  color: #101629 !important;
-  box-shadow: 0 8px 26px rgba(96, 165, 250, .12);
-}
-
-.bg-\[\#315efb\] {
-  background: linear-gradient(120deg, #6366f1, #8b5cf6 55%, #06b6d4) !important;
-  color: #fff !important;
-}
-
-.text-white { color: #f8faff; }
-
-.border-\[\#dfe4ec\],
-.border-\[\#d6dbe3\],
-.border-\[\#cbd3df\] { border-color: rgba(148, 163, 184, .22) !important; }
-
-header {
-  background: rgba(7, 11, 20, .78) !important;
-  border-color: rgba(148, 163, 184, .16) !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, .14);
-}
-
-header a,
-header button { color: #d7def0 !important; }
-
-header nav {
-  background: rgba(15, 23, 42, .65) !important;
-  border-color: rgba(148, 163, 184, .16) !important;
-  backdrop-filter: blur(16px);
-}
-
-header nav a:hover {
-  background: rgba(139, 92, 246, .16) !important;
-  color: #fff !important;
-}
+html { scroll-padding-top: 88px; }
+section[id] { scroll-margin-top: 88px; }
+.font-display { font-family: var(--font-display); }
 
 body::before {
-  opacity: .62;
+  content: '';
+  position: fixed;
+  inset: -18%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .64;
   background:
-    radial-gradient(ellipse 42% 38% at 8% 4%, rgba(59, 130, 246, .25), transparent 72%),
-    radial-gradient(ellipse 43% 36% at 92% 12%, rgba(139, 92, 246, .2), transparent 72%),
-    radial-gradient(ellipse 48% 38% at 50% 98%, rgba(6, 182, 212, .12), transparent 74%);
-  filter: blur(54px);
+    radial-gradient(ellipse 38% 30% at 8% 4%, rgba(59, 95, 232, .2), transparent 74%),
+    radial-gradient(ellipse 38% 34% at 92% 10%, rgba(135, 79, 224, .17), transparent 74%),
+    radial-gradient(ellipse 44% 32% at 52% 96%, rgba(19, 155, 178, .09), transparent 74%);
+  filter: blur(60px);
+  animation: aurora-drift 22s ease-in-out infinite alternate;
 }
 
-.hero-section {
-  position: relative;
-  isolation: isolate;
+@keyframes aurora-drift {
+  from { transform: translate3d(-1%, -1%, 0) scale(1); }
+  to { transform: translate3d(1%, 1%, 0) scale(1.05); }
 }
 
+header {
+  border-color: rgba(148, 163, 184, .14) !important;
+  background: rgba(8, 10, 16, .78) !important;
+  backdrop-filter: blur(22px) saturate(145%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .16);
+}
+header nav { backdrop-filter: blur(16px); }
+main { position: relative; }
+.hero-section { isolation: isolate; }
 .hero-section::before {
-  opacity: .22;
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .42;
   background-image:
-    linear-gradient(rgba(148, 163, 184, .10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, .10) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(ellipse at top, black 10%, transparent 76%);
+    linear-gradient(rgba(148, 163, 184, .075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, .075) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 50% 0%, #000 8%, transparent 75%);
 }
-
 .hero-section::after {
-  width: min(1050px, 100%);
-  height: 660px;
-  background:
-    radial-gradient(ellipse at 25% 10%, rgba(99, 102, 241, .2), transparent 46%),
-    radial-gradient(ellipse at 78% 20%, rgba(6, 182, 212, .13), transparent 42%);
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: -1;
+  width: min(1040px, 100%);
+  height: 620px;
+  pointer-events: none;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at 34% 10%, rgba(104, 91, 230, .2), transparent 58%), radial-gradient(ellipse at 78% 22%, rgba(36, 155, 197, .12), transparent 48%);
   filter: blur(36px);
 }
 
-main::before {
-  opacity: .35;
-  background: radial-gradient(520px circle at var(--spot-x, 50%) var(--spot-y, 12%), rgba(139, 92, 246, .14), transparent 68%);
+.hero-visual {
+  border-radius: 1.35rem;
+  border-color: rgba(148, 163, 184, .2) !important;
+  background: #0d111a !important;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .34), 0 0 70px rgba(99, 102, 241, .09);
 }
+.hero-visual > div:nth-child(2) { border-radius: 1rem; }
+.hero-visual img { border-radius: .9rem; }
 
-.project-card {
-  border: 1px solid rgba(148, 163, 184, .20) !important;
-  border-radius: 18px;
-  background: linear-gradient(155deg, rgba(17, 26, 45, .96), rgba(10, 15, 27, .96)) !important;
-  color: #f4f7ff !important;
-  box-shadow: 0 12px 38px rgba(0, 0, 0, .13);
-  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(129, 140, 248, .68) !important;
-  box-shadow: 0 20px 54px rgba(15, 23, 42, .42), 0 0 0 1px rgba(139, 92, 246, .10);
-}
-
-.project-card::after {
-  width: 3px;
-  background: linear-gradient(180deg, #60a5fa, #a78bfa, #67e8f9);
-  opacity: .25;
-}
-
-.project-card:hover::after { opacity: 1; }
-
-.project-card h3 { color: #f7f8ff !important; }
-.project-card p { color: #b7c2d6 !important; }
-.project-card span { color: #d9e2f3; }
-.project-card img { transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .4s ease; }
-.project-card:hover img { filter: saturate(1.12) contrast(1.03); }
-
+.project-card,
 #pricing article,
 #research article {
-  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.1rem;
   border-color: rgba(148, 163, 184, .18) !important;
-  background: linear-gradient(155deg, rgba(17, 26, 45, .94), rgba(10, 15, 27, .95)) !important;
-  color: #eff4ff !important;
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1), border-color .25s ease, box-shadow .28s ease, background-color .25s ease;
 }
-
-#pricing article p,
-#research article p { color: #b7c2d6; }
-
+.project-card {
+  background: linear-gradient(155deg, rgba(17, 22, 34, .98), rgba(10, 13, 21, .98)) !important;
+  box-shadow: 0 14px 42px rgba(0, 0, 0, .19);
+}
+.project-card::before,
+#pricing article::before,
+#research article::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(360px circle at 50% 0%, rgba(143, 123, 255, .11), transparent 68%);
+  transition: opacity .28s ease;
+}
+.project-card:hover,
 #pricing article:hover,
 #research article:hover {
-  border-color: rgba(129, 140, 248, .6) !important;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, .25), 0 0 30px rgba(99, 102, 241, .09);
+  transform: translateY(-5px);
+  border-color: rgba(157, 139, 255, .48) !important;
+  box-shadow: 0 24px 62px rgba(0, 0, 0, .34), 0 0 32px rgba(117, 97, 230, .09);
+}
+.project-card:hover::before,
+#pricing article:hover::before,
+#research article:hover::before { opacity: 1; }
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, #7c9cff, #b08bff, #67dce6);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.project-card:hover::after { opacity: .9; }
+.project-card img { transition: transform .6s cubic-bezier(.2, .8, .2, 1), filter .4s ease; }
+.project-card:hover img { filter: saturate(1.1) contrast(1.03); }
+#pricing article,
+#research article { background: linear-gradient(155deg, rgba(17, 22, 34, .96), rgba(10, 13, 21, .98)) !important; }
+
+/* Progressive enhancement: reveal cards as they enter the viewport where view timelines exist. */
+@supports (animation-timeline: view()) {
+  .reveal-on-scroll { animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 24%; }
+}
+@keyframes reveal-in {
+  from { opacity: .25; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-input, textarea, select {
-  color: #f4f7ff;
-  background-color: rgba(10, 15, 28, .82);
-  border-color: rgba(148, 163, 184, .24);
-}
-
-input::placeholder,
-textarea::placeholder { color: #8290a8 !important; }
-
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #a78bfa;
-  outline-offset: 3px;
-}
-
-button, a { -webkit-tap-highlight-color: transparent; }
-
-a, button, input, textarea, select {
-  transition-property: color, background-color, border-color, box-shadow, transform;
-  transition-duration: .2s;
-  transition-timing-function: ease;
-}
-
-/* Light theme is opt-in; its surfaces and copy use a separate, consistently readable palette. */
-html.light {
-  color-scheme: light;
-  --background: #f5f7ff;
-  --foreground: #172033;
-  --border: #d7dfed;
-  --ring: #6366f1;
-}
-
-html.light body {
-  background: #f5f7ff;
-  color: #172033;
-}
-
-html.light body::before {
-  opacity: .5;
-  background:
-    radial-gradient(ellipse 42% 38% at 8% 4%, rgba(59, 130, 246, .14), transparent 72%),
-    radial-gradient(ellipse 43% 36% at 92% 12%, rgba(139, 92, 246, .12), transparent 72%),
-    radial-gradient(ellipse 48% 38% at 50% 98%, rgba(6, 182, 212, .08), transparent 74%);
-}
-
-html.light .text-slate-500,
-html.light .text-slate-600 { color: #5d6b83 !important; }
-html.light .text-slate-700 { color: #334155 !important; }
-html.light .text-white { color: #172033 !important; }
-html.light .text-\[\#172033\] { color: #172033 !important; }
-html.light .text-\[\#075985\],
-html.light .text-\[\#1769aa\],
-html.light .text-\[\#315efb\] { color: #4338ca !important; }
-
-html.light .bg-white {
-  background-color: #fff !important;
-  color: #172033 !important;
-}
-
-html.light .bg-\[\#315efb\] {
-  background: linear-gradient(120deg, #4f46e5, #7c3aed 55%, #0891b2) !important;
-  color: #fff !important;
-}
-
-html.light header {
-  background: rgba(248, 250, 255, .84) !important;
-  border-color: rgba(203, 213, 225, .8) !important;
-}
-
-html.light header a,
-html.light header button { color: #334155 !important; }
-
-html.light header nav {
-  background: rgba(255, 255, 255, .78) !important;
-  border-color: #dbe3ef !important;
-}
-
-html.light header nav a:hover {
-  color: #3730a3 !important;
-  background: #eef2ff !important;
-}
-
-html.light .project-card,
-html.light #pricing article,
-html.light #research article {
-  background: linear-gradient(155deg, #fff, #f7f8ff) !important;
-  color: #172033 !important;
-  border-color: #dbe3ef !important;
-  box-shadow: 0 12px 35px rgba(31, 41, 55, .06);
-}
-
-html.light .project-card h3 { color: #172033 !important; }
-html.light .project-card p,
-html.light #pricing article p,
-html.light #research article p { color: #5d6b83 !important; }
-html.light .project-card span { color: #334155; }
-
-html.light input,
-html.light textarea,
-html.light select {
-  color: #172033;
-  background-color: rgba(255, 255, 255, .9);
-  border-color: #cbd5e1;
-}
-
-html.light input::placeholder,
-html.light textarea::placeholder { color: #64748b !important; }
-
-html.light .hero-section::before {
-  background-image:
-    linear-gradient(rgba(100, 116, 139, .10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(100, 116, 139, .10) 1px, transparent 1px);
-}
-
-html.light .theme-surface {
-  background-color: rgba(255, 255, 255, .68) !important;
-  color: #172033 !important;
-  border-color: #dbe3ef !important;
-  backdrop-filter: blur(18px);
-}
-
-html.light .theme-surface .text-white { color: #172033 !important; }
-html.light .theme-surface .text-slate-300,
-html.light .theme-surface .text-slate-400 { color: #5d6b83 !important; }
-
-@media (prefers-reduced-motion: reduce) {
-  body::before { animation: none !important; }
-  .project-card, .project-card img, #pricing article, #research article {
-    transition: none !important;
-  }
-}
-
-
-/* Action-label contrast fixes for utility classes used by the existing markup. */
+.text-slate-500,
+.text-slate-600 { color: #9aa4b8 !important; }
+.text-slate-700 { color: #c3ccdc !important; }
+.text-\[\#172033\] { color: #f0f2fa !important; }
+.text-\[\#075985\],
+.text-\[\#1769aa\],
+.text-\[\#315efb\] { color: #a99aff !important; }
+.border-\[\#dfe4ec\],
+.border-\[\#d6dbe3\],
+.border-\[\#cbd3df\],
+.border-white\/10,
+.border-white\/15 { border-color: rgba(148, 163, 184, .17) !important; }
+.bg-\[\#f7f8fb\],
+.bg-\[\#eef3f8\],
+.bg-white\/\[0\.035\],
+.bg-white\/\[0\.04\] { background-color: transparent !important; }
+#pricing article,
+#research article,
+.project-card,
+.theme-surface { color: #f5f6fb !important; }
+.project-card h3,
+#pricing article h3,
+#research article h3 { color: #f5f6fb !important; }
+.project-card p,
+#pricing article p,
+#research article p { color: #aab4c7; }
+.bg-white,
+.bg-white.text-slate-950,
+a.bg-white,
+button.bg-white { color: #11131a !important; }
 a.bg-white,
 button.bg-white,
-.bg-white.text-slate-950,
-.bg-white .text-slate-950 { color: #101629 !important; }
-
-[class~="bg-[#25D366]"],
-[class~="bg-[#25D366]"] .text-slate-950 {
-  background-color: #25d366 !important;
-  color: #052e16 !important;
+.bg-white.text-slate-950 {
+  background: linear-gradient(135deg, #fff, #e7eaff) !important;
+  box-shadow: 0 8px 28px rgba(117, 104, 237, .14);
 }
-
-html.light a.bg-white,
-html.light button.bg-white,
-html.light .bg-white.text-slate-950,
-html.light .bg-white .text-slate-950 { color: #101629 !important; }
-
-html.light [class~="bg-[#25D366]"],
-html.light [class~="bg-[#25D366]"] .text-slate-950 { color: #052e16 !important; }
-
-html.light [class~="bg-[#315efb]"] .text-white,
-html.light [class~="bg-[#315efb]"].text-white { color: #fff !important; }
-
-
-/* Pure-black dark theme + shadcn-style design tokens and surfaces. */
-html:not(.light) {
-  color-scheme: dark;
-  --background: #000000;
-  --foreground: #f5f7fb;
-  --border: #242424;
-  --ring: #818cf8;
-  --surface-1: #080808;
-  --surface-2: #0d0d0d;
-  --muted: #a1a1aa;
-  --muted-strong: #d4d4d8;
+.bg-\[\#315efb\],
+[class~="bg-[#315efb]"] { background: linear-gradient(120deg, #667cf6, #9168ec 58%, #35b9ce) !important; color: #fff !important; }
+[class~="bg-[#25D366]"] { background-color: #25d366 !important; color: #052e16 !important; }
+input, textarea, select {
+  color: #f4f6fb;
+  background-color: rgba(10, 14, 23, .8);
+  border-color: rgba(148, 163, 184, .2);
 }
+input::placeholder, textarea::placeholder { color: #7e8aa1 !important; }
+input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: #a78bfa !important; box-shadow: 0 0 0 3px rgba(167, 139, 250, .16); }
 
-html:not(.light) body {
-  background: #000 !important;
-  color: #f5f7fb !important;
-}
-
-html:not(.light) body::before {
-  opacity: .3;
-  background:
-    radial-gradient(ellipse 38% 30% at 8% 0%, rgba(79, 70, 229, .14), transparent 75%),
-    radial-gradient(ellipse 35% 30% at 92% 8%, rgba(124, 58, 237, .10), transparent 75%);
-  filter: blur(64px);
-}
-
-html:not(.light) .hero-section::before {
-  opacity: .14;
-  background-image:
-    linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at top, black 8%, transparent 76%);
-}
-
-html:not(.light) header {
-  background: rgba(0, 0, 0, .82) !important;
-  border-color: #202020 !important;
-  box-shadow: 0 8px 36px rgba(0,0,0,.34);
-  backdrop-filter: blur(22px) saturate(150%);
-}
-
-html:not(.light) header nav {
-  background: rgba(255,255,255,.035) !important;
-  border-color: #252525 !important;
-}
-
-html:not(.light) header a,
-html:not(.light) header button { color: #d4d4d8 !important; }
-
-html:not(.light) header nav a:hover {
-  color: #fff !important;
-  background: rgba(255,255,255,.07) !important;
-}
-
-html:not(.light) main > section,
-html:not(.light) main > section.theme-surface {
-  background-color: transparent !important;
-}
-
-html:not(.light) .project-card,
-html:not(.light) #pricing article,
-html:not(.light) #research article,
-html:not(.light) .theme-surface {
-  background: #080808 !important;
-  border-color: #242424 !important;
-  color: #f5f7fb !important;
-  box-shadow: 0 1px 0 rgba(255,255,255,.025), 0 16px 48px rgba(0,0,0,.24);
-}
-
-html:not(.light) .project-card:hover,
-html:not(.light) #pricing article:hover,
-html:not(.light) #research article:hover {
-  background: #0b0b0b !important;
-  border-color: #45405f !important;
-  box-shadow: 0 18px 60px rgba(0,0,0,.48), 0 0 32px rgba(99,102,241,.08);
-}
-
-html:not(.light) .project-card h3,
-html:not(.light) #pricing article h3 { color: #fafafa !important; }
-
-html:not(.light) .project-card p,
-html:not(.light) #pricing article p,
-html:not(.light) #research article p { color: #a1a1aa !important; }
-
-html:not(.light) .project-card span { color: #d4d4d8; }
-
-html:not(.light) .text-slate-500,
-html:not(.light) .text-slate-600 { color: #a1a1aa !important; }
-
-html:not(.light) .text-slate-700 { color: #d4d4d8 !important; }
-
-html:not(.light) .text-\[\#172033\] { color: #f4f4f5 !important; }
-
-html:not(.light) .text-\[\#075985\],
-html:not(.light) .text-\[\#1769aa\],
-html:not(.light) .text-\[\#315efb\] { color: #a5b4fc !important; }
-
-html:not(.light) .bg-\[\#f7f8fb\],
-html:not(.light) .bg-\[\#eef3f8\],
-html:not(.light) .bg-white\/\[0\.035\],
-html:not(.light) .bg-white\/\[0\.04\] { background: #080808 !important; }
-
-html:not(.light) .border-\[\#dfe4ec\],
-html:not(.light) .border-\[\#d6dbe3\],
-html:not(.light) .border-\[\#cbd3df\],
-html:not(.light) .border-white\/10,
-html:not(.light) .border-white\/15 { border-color: #242424 !important; }
-
-html:not(.light) a.bg-white,
-html:not(.light) button.bg-white,
-html:not(.light) .bg-white.text-slate-950 {
-  background: #f5f5f5 !important;
-  color: #09090b !important;
-  border-color: #f5f5f5 !important;
-}
-
-html:not(.light) .bg-\[\#315efb\],
-html:not(.light) [class~="bg-[#315efb]"] {
-  background: linear-gradient(135deg, #6366f1, #8b5cf6) !important;
-  color: #fff !important;
-}
-
-html:not(.light) input,
-html:not(.light) textarea,
-html:not(.light) select {
-  color: #f4f4f5 !important;
-  background: #080808 !important;
-  border-color: #2a2a2a !important;
-  border-radius: 10px;
-}
-
-html:not(.light) input::placeholder,
-html:not(.light) textarea::placeholder { color: #71717a !important; }
-
-html:not(.light) :is(button, a, input, textarea, select):focus-visible {
-  outline: 2px solid #818cf8;
-  outline-offset: 3px;
-}
-
-html:not(.light) .rounded-lg,
-html:not(.light) .rounded-xl { border-radius: 12px; }
-
-html:not(.light) .project-card::after {
-  background: linear-gradient(180deg, #818cf8, #c084fc, #67e8f9);
-}
-
-html:not(.light) ::selection {
-  color: #fff;
-  background: rgba(99,102,241,.62);
-}
-
-/* Keep the light theme independent from the pure-black overrides above. */
+/* Light mode stays a full, readable theme rather than inheriting dark card text. */
 html.light {
   color-scheme: light;
+  --background: #f7f8fc;
+  --foreground: #182033;
+  --border: #dce2ec;
+  --ring: #6d5ce7;
+  --surface: #fff;
+  --surface-raised: #fff;
+  --brand: #5b4bd8;
 }
+html.light body { background: #f7f8fc; color: #182033; }
+html.light body::before { opacity: .34; }
+html.light header { background: rgba(248, 250, 255, .82) !important; border-color: rgba(203, 213, 225, .8) !important; }
+html.light header a, html.light header button { color: #34415a !important; }
+html.light header nav { background: rgba(255,255,255,.75) !important; border-color: #dce2ec !important; }
+html.light .text-slate-500, html.light .text-slate-600 { color: #65728a !important; }
+html.light .text-slate-700 { color: #46536b !important; }
+html.light .text-\[\#172033\] { color: #182033 !important; }
+html.light .text-\[\#075985\], html.light .text-\[\#1769aa\], html.light .text-\[\#315efb\] { color: #5445c7 !important; }
+html.light .bg-\[\#f7f8fb\], html.light .bg-\[\#eef3f8\], html.light .bg-white\/\[0\.035\], html.light .bg-white\/\[0\.04\] { background-color: transparent !important; }
+html.light .border-\[\#dfe4ec\], html.light .border-\[\#d6dbe3\], html.light .border-\[\#cbd3df\], html.light .border-white\/10, html.light .border-white\/15 { border-color: #dce2ec !important; }
+html.light .project-card, html.light #pricing article, html.light #research article, html.light .theme-surface { background: #fff !important; color: #182033 !important; border-color: #dce2ec !important; box-shadow: 0 12px 38px rgba(34, 48, 75, .07); }
+html.light .project-card h3, html.light #pricing article h3, html.light #research article h3, html.light .theme-surface .text-white { color: #182033 !important; }
+html.light .project-card p, html.light #pricing article p, html.light #research article p, html.light .theme-surface .text-slate-300, html.light .theme-surface .text-slate-400 { color: #65728a !important; }
+html.light .project-card span { color: #44516a; }
+html.light input, html.light textarea, html.light select { color: #182033 !important; background: #fff !important; border-color: #cbd5e1 !important; }
+html.light input::placeholder, html.light textarea::placeholder { color: #718096 !important; }
+html.light .hero-section::before { opacity: .58; background-image: linear-gradient(rgba(100,116,139,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(100,116,139,.08) 1px,transparent 1px); }
+html.light .hero-visual { background: #fff !important; }
+html.light a.bg-white, html.light button.bg-white, html.light .bg-white.text-slate-950 { background: linear-gradient(135deg,#fff,#e7eaff) !important; color: #11131a !important; }
+html.light [class~="bg-[#25D366]"] { color: #052e16 !important; }
 
-/* shadcn/ui-aligned polish for ProjectForge's existing base-nova setup. */
-html:not(.light) {
-  --background: #000;
-  --foreground: #f5f5f5;
-  --border: #262626;
-  --ring: #818cf8;
-  --radius: .75rem;
-  --card: #080808;
-  --muted: #111113;
-  --muted-foreground: #a1a1aa;
+@media (max-width: 639px) {
+  .hero-section::before { background-size: 34px 34px; }
+  .hero-visual { border-radius: 1rem; }
 }
-
-html:not(.light) .project-card,
-html:not(.light) #pricing article,
-html:not(.light) #research article {
-  border-color: #262626 !important;
-  background: #080808 !important;
-  border-radius: 1rem;
-  box-shadow: 0 1px 0 rgba(255,255,255,.025), 0 14px 44px rgba(0,0,0,.28);
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  body::before { animation: none !important; }
 }
-
-html:not(.light) .project-card:hover,
-html:not(.light) #pricing article:hover,
-html:not(.light) #research article:hover {
-  border-color: #49445f !important;
-  background: #0b0b0c !important;
-  box-shadow: 0 18px 55px rgba(0,0,0,.44), 0 0 28px rgba(129,140,248,.07);
-}
-
-html:not(.light) input:focus-visible,
-html:not(.light) textarea:focus-visible,
-html:not(.light) select:focus-visible {
-  border-color: #818cf8 !important;
-  box-shadow: 0 0 0 3px rgba(129,140,248,.18);
-}
-
-html:not(.light) button[data-slot="button"]:focus-visible,
-html:not(.light) a[data-slot="button"]:focus-visible {
-  outline: 2px solid #a5b4fc;
-  outline-offset: 3px;
-}
-
-html:not(.light) button[data-slot="button"][data-variant="outline"] {
-  border-color: #303036;
-}
-
-html:not(.light) button[data-slot="button"][data-variant="outline"]:hover {
-  border-color: #484852;
-}
-
-html.light {
-  --background: #f8fafc;
-  --foreground: #172033;
-  --border: #dbe2ec;
-  --ring: #6366f1;
-  --radius: .75rem;
-}
-
