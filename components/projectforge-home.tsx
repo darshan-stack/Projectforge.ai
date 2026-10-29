@@ -10,11 +10,9 @@ import {
   BookOpen,
   Check,
   ChevronDown,
-  CircleHelp,
   Code2,
   Cpu,
   FlaskConical,
-  Github,
   GraduationCap,
   Layers3,
   Menu,
@@ -31,7 +29,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getWhatsAppHref } from "@/lib/config";
-import { domains, projects } from "@/lib/projects";
+import { projects } from "@/lib/projects";
 
 const featureItems = [
   {
