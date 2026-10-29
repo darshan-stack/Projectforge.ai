@@ -1,5 +1,5 @@
-import { Marketplace } from '@/components/marketplace'
+import { ProjectForgeHome } from "@/components/projectforge-home";
 
 export default function Page() {
-  return <Marketplace />
+  return <ProjectForgeHome />;
 }
