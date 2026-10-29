@@ -619,4 +619,11 @@ html.light [class~="bg-[#25D366]"] { color: #052e16 !important; }
 @media (prefers-reduced-motion: reduce) {
   .pf-home *, .pf-home *::before, .pf-home *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
 }
+/* Keep the product-style header's light palette above legacy global header defaults. */
+.pf-home .pf-header {
+  background: rgba(252, 253, 250, .94) !important;
+  border-color: #edf0ec !important;
+  box-shadow: 0 5px 22px rgba(28, 48, 30, .035);
+}
+.pf-home .pf-header nav { background: transparent; }
 
